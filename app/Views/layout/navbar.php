@@ -22,8 +22,11 @@ echo $this->section('navbar');
                         <a class="nav-link mx-4" aria-current="page" href="<?= base_url('home') ?>">
                             <i class="bi bi-house-door text-dark" style="font-size: 1.5rem;"></i>
                         </a>
-                        <a class="nav-link mx-4" href="<?= base_url('new_post') ?>">
+                        <a class="nav-link mx-4" href="<?= base_url('post/new_post') ?>">
                             <i class="bi bi-plus-square text-dark" style="font-size: 1.5rem;"></i>
+                        </a>
+                        <a class="nav-link mx-4" href="<?= base_url('profile/liked_post') ?>">
+                            <i class="bi bi-bookmark text-dark" style="font-size: 1.5rem;"></i>
                         </a>
                         <a class="nav-link mx-4" href="/contact">
                             <i class="bi bi-person text-dark" style="font-size: 1.5rem;"></i>
@@ -38,7 +41,15 @@ echo $this->section('navbar');
                         <?php
                         if (logged_in()) {
                         ?>
-                            <img src="/assets/img/_MG_6850.JPG" alt="" width="40" height="40" class="rounded-circle shadow-sm">
+                            <div class="dropdown">
+                                <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <!-- <i class="bi bi-chevron-down"></i> -->
+                                    <img src="<?= base_url('assets/img/profile_photo/' . (user()->profile_image == null ? 'default-profile.png' : user()->profile_image)) ?>" alt="" width="40" height="40" class="rounded-circle shadow-sm">
+                                </div>
+                                <ul class="dropdown-menu">
+                                    <li><a href="<?= base_url('logout') ?>" class="dropdown-item">LogOut</a></li>
+                                </ul>
+                            </div>
                         <?php
                         } else {
                         ?>
@@ -52,6 +63,7 @@ echo $this->section('navbar');
         </div>
     </div>
 </nav>
+
 
 <?= $this->renderSection('content') ?>
 

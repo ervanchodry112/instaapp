@@ -20,6 +20,7 @@
 	color: #007bff !important;
 }
 
-.card-footer button:hover {
+.card-footer button:hover,
+.card-footer a:hover {
 	background-color: rgb(247, 247, 247);
 }
