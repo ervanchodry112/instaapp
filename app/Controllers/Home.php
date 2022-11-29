@@ -21,42 +21,15 @@ class Home extends BaseController
 
     public function index()
     {
-        $post = $this->postModel->join('users', 'posts.id_user=users.id')->findAll();
+        $post = $this->postModel->select('posts.id_post, posts.image, posts.id_user, posts.caption, posts.tanggal, likes.is_liked, users.name, users.profile_image')
+            ->join('likes', 'posts.id_post=likes.id_post', 'left outer')->join('users', 'posts.id_user=users.id')->findAll();
+        // $like = $this->likeModel->select('id_post')->where('id_user', user_id())->findAll();
+        // dd($post);
         $data = [
             'title' => 'Beranda',
             'posts' => $post,
+            // 'like'  => $like,
         ];
         return view('home/home', $data);
-    }
-
-    public function new_post()
-    {
-        $data = [
-            'title' => 'New Post',
-        ];
-
-        return view('home/new_post', $data);
-    }
-
-    public function create_post()
-    {
-        $caption = $this->request->getVar('caption');
-        $file = $this->request->getFile('image');
-        $file_name = $file->getRandomName();
-        $file->move('assets/img/post_image', $file_name);
-        // dd(date('Y-m-d'));
-        $save = [
-            'id_user'   => user_id(),
-            'image'     => $file_name,
-            'caption'   => $caption,
-            'tanggal'   => date('Y-m-d'),
-        ];
-
-        if (!$this->postModel->save($save)) {
-            session()->setFlashdata('error', 'Gagal Membuat Post');
-            return redirect()->to(base_url('new_post'))->withInput();
-        }
-        session()->setFlashdata('success', 'Berhasil membuat post');
-        return redirect()->to(base_url('home'));
     }
 }

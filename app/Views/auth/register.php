@@ -15,7 +15,6 @@ echo $this->section('navbar');
 
             <div class="mb-3">
                 <?= view('Myth\Auth\Views\_message_block') ?>
-                <?= d(session('errors')) ?>
             </div>
             <div class="form-floating mb-3">
                 <input type="email" class="form-control <?php if (session('errors.email')) : ?>is-invalid<?php endif ?>" name="email" id="email" placeholder="name@example.com" value="<?= old('email') ?>">

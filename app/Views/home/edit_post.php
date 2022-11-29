@@ -11,24 +11,16 @@ echo $this->section('content');
                 <div class="card-body">
                     <div class="h3 mb-2 card-title">Create New Post</div>
                     <hr>
-                    <form action="<?= base_url('post/create_post') ?>" method="post" enctype="multipart/form-data">
+                    <form action="<?= base_url('post/save_post') ?>" method="post">
                         <?= csrf_field() ?>
+                        <input type="hidden" name="id_post" value="<?= $post->id_post ?>">
                         <div class="row mb-2 text-start">
-                            <label for="image" class="col-form-label col-2">Photo</label>
-                            <div class="col-10">
-                                <input type="file" name="image" id="image" class="form-control <?= ($validation->hasError('image') ? 'is-invalid' : '') ?>" value="<?= old('image') ?>" accept="image/*">
-                            </div>
-                            <div class="invalid-feedback">
-                                <?= $validation->getError('image') ?>
-                            </div>
+                            <img src="<?= base_url('assets/img/post_image/' . $post->image) ?>" class="w-50 mx-auto" alt="Post Image">
                         </div>
                         <div class="row mb-3 text-start">
                             <label for="caption" class="col-form-label col-2">Caption</label>
                             <div class="col-10">
-                                <textarea name="caption" id="caption " class="form-control <?= ($validation->hasError('caption') ? 'is-invalid' : '') ?>" required></textarea>
-                            </div>
-                            <div class="invalid-feedback">
-                                <?= $validation->getError('caption') ?>
+                                <textarea name="caption" id="caption" class="form-control"><?= $post->caption ?></textarea>
                             </div>
                         </div>
                         <div class="row d-flex justify-content-end">
@@ -36,7 +28,7 @@ echo $this->section('content');
                                 <a href="<?= base_url('home') ?>" class="btn btn-secondary btn-sm w-100">CANCEL</a>
                             </div>
                             <div class="col-3 text-end ">
-                                <button type="submit" class="btn btn-primary btn-sm w-100">POST</button>
+                                <button type="submit" class="btn btn-primary btn-sm w-100">SAVE</button>
                             </div>
                         </div>
                     </form>
