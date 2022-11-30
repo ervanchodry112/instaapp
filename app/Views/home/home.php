@@ -58,7 +58,7 @@ echo $this->section('content');
                             <div class="row">
                                 <a href="<?= base_url('post/like/' . $p->id_post) ?>" class="col btn btn-white">
                                     <?php
-                                    if ($p->is_liked != null) {
+                                    if ($p->is_liked != null && $p->likes_user == user_id()) {
                                     ?>
                                         <i class="bi bi-heart-fill me-1"></i>
                                     <?php

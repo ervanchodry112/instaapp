@@ -28,7 +28,7 @@ echo $this->section('navbar');
                         <a class="nav-link mx-4" href="<?= base_url('profile/liked_post') ?>">
                             <i class="bi bi-bookmark text-dark" style="font-size: 1.5rem;"></i>
                         </a>
-                        <a class="nav-link mx-4" href="/contact">
+                        <a class="nav-link mx-4" href="<?= base_url('profile') ?>">
                             <i class="bi bi-person text-dark" style="font-size: 1.5rem;"></i>
                         </a>
                     </div>
