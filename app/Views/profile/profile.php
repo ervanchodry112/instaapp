@@ -67,7 +67,7 @@ echo $this->section('content');
                                             <button class="btn btn-sm btn-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <!-- <i class="bi bi-three-dots-vertical"></i> -->
                                             </button>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
                                                 <form action="<?= base_url('post/edit_post') ?>" method="post">
                                                     <input type="hidden" name="id" value="<?= $p->id_post ?>">
                                                     <li><button class="dropdown-item" type="submit">Edit Post</button></li>

@@ -46,7 +46,7 @@ echo $this->section('navbar');
                                     <!-- <i class="bi bi-chevron-down"></i> -->
                                     <img src="<?= base_url('assets/img/profile_photo/' . (user()->profile_image == null ? 'default-profile.png' : user()->profile_image)) ?>" alt="" width="40" height="40" class="rounded-circle shadow-sm">
                                 </div>
-                                <ul class="dropdown-menu">
+                                <ul class="dropdown-menu dropdown-menu-end">
                                     <li><a href="<?= base_url('logout') ?>" class="dropdown-item">LogOut</a></li>
                                 </ul>
                             </div>
