@@ -132,11 +132,13 @@ class Post extends BaseController
 
     public function comment_post($id)
     {
-        $comment = $this->commentModel->join('posts', 'posts.id_post=comments.id_post')->join('users', 'users.id=comments.id_user')->where('comments.id_post', $id)->findAll();
-        // dd($comment);
+        $comment = $this->commentModel->join('users', 'users.id=comments.id_user')->where('comments.id_post', $id)->findAll();
+        $post = $this->postModel->where('id_post', $id)->join('users', 'users.id=posts.id_user')->first();
+        // dd($post);
         $data = [
             'title' => "Comments",
             'comments'  => $comment,
+            'post'  => $post,
         ];
 
         return view('home/comment', $data);
@@ -157,6 +159,50 @@ class Post extends BaseController
             return redirect()->to(base_url('home'));
         }
         session()->setFlashdata('success', 'Berhasil menambahkan komentar');
+        return redirect()->to(base_url('home'));
+    }
+
+    public function edit_comment()
+    {
+        $id = $this->request->getVar('id');
+        $comment = $this->commentModel->where('id_comment', $id)->first();
+        $data = [
+            'title' => 'Edit Comment',
+            'comment' => $comment,
+        ];
+        return view('home/edit_comment', $data);
+    }
+
+    public function save_comment()
+    {
+        $comment = $this->request->getVar('comment');
+        $id = $this->request->getVar('id_comment');
+        $data = [
+            'id_comment'   => $id,
+            'comment'   => $comment,
+        ];
+
+        if (!$this->commentModel->save($data)) {
+            session()->setFlashdata('error', 'Gagal Mengedit Comment');
+            return redirect()->to(base_url('home'))->withInput();
+        }
+        session()->setFlashdata('success', 'Berhasil Mengedit Comment');
+        return redirect()->to(base_url('home'));
+    }
+
+    public function delete_comment()
+    {
+        $id = $this->request->getVar('id');
+        $comment = $this->commentModel->where('id_comment', $id)->first();
+        if ($comment->id_user != user_id()) {
+            session()->setFlashdata('error', 'Anda tidak memiliki akses untuk menghapus comment ini');
+            return redirect()->to(base_url('home'));
+        }
+        if (!$this->commentModel->where('id_comment', $id)->delete()) {
+            session()->setFlashdata('error', 'Gagal menghapus comment');
+            return redirect()->to(base_url('home'));
+        }
+        session()->setFlashdata('success', 'Berhasil menghapus comment');
         return redirect()->to(base_url('home'));
     }
 }

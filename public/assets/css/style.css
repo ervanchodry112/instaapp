@@ -24,3 +24,8 @@
 .card-footer a:hover {
 	background-color: rgb(247, 247, 247);
 }
+
+#fotoButton:hover {
+	color: white !important;
+	background-color: #007bff;
+}

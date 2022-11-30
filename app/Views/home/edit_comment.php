@@ -9,18 +9,15 @@ echo $this->section('content');
         <div class="col-12 d-flex align-items-center justify-content-center" style="height: 75vh;">
             <div class="card w-100 text-center" style="height: auto;">
                 <div class="card-body">
-                    <div class="h3 mb-2 card-title">Edit Post</div>
+                    <div class="h3 mb-2 card-title">Edit Comment</div>
                     <hr>
-                    <form action="<?= base_url('post/save_post') ?>" method="post">
+                    <form action="<?= base_url('post/save_comment') ?>" method="post">
                         <?= csrf_field() ?>
-                        <input type="hidden" name="id_post" value="<?= $post->id_post ?>">
-                        <div class="row mb-2 text-start">
-                            <img src="<?= base_url('assets/img/post_image/' . $post->image) ?>" class="w-50 mx-auto" alt="Post Image">
-                        </div>
+                        <input type="hidden" name="id_comment" value="<?= $comment->id_comment ?>">
                         <div class="row mb-3 text-start">
-                            <label for="caption" class="col-form-label col-2">Caption</label>
+                            <label for="comment" class="col-form-label col-2">Comment</label>
                             <div class="col-10">
-                                <textarea name="caption" id="caption" class="form-control"><?= $post->caption ?></textarea>
+                                <textarea name="comment" id="comment" class="form-control"><?= $comment->comment ?></textarea>
                             </div>
                         </div>
                         <div class="row d-flex justify-content-end">
